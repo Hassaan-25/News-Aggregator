@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import SearchBar from "../../components/SearchBar";
 import FilterBar from "../../components/FilterBar";
 import ArticleCard from "../../components/ArticleCard";

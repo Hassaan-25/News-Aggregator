@@ -1,13 +1,8 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 // import PreferencesPage from "./pages/PreferencesPage";
 import FiltersContext from "./context/FiltersContext";
-import {
-  ChakraBaseProvider,
-  extendBaseTheme,
-  theme as chakraTheme,
-} from "@chakra-ui/react";
+import { ChakraBaseProvider, theme as chakraTheme } from "@chakra-ui/react";
 
 const App = () => {
   return (
