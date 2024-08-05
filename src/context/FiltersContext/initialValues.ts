@@ -1,0 +1,1 @@
+export const filtersInitialValues = { searchText: "", category: "", date: "" }

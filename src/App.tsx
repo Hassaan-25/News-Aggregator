@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/Home";
+// import PreferencesPage from "./pages/PreferencesPage";
+import FiltersContext from "./context/FiltersContext";
+import {
+  ChakraBaseProvider,
+  extendBaseTheme,
+  theme as chakraTheme,
+} from "@chakra-ui/react";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraBaseProvider theme={chakraTheme}>
+      <FiltersContext>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {/* <Route path="/preferences" element={<PreferencesPage />} /> */}
+          </Routes>
+        </Router>
+      </FiltersContext>
+    </ChakraBaseProvider>
   );
-}
+};
 
 export default App;
