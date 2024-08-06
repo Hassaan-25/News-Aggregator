@@ -65,11 +65,13 @@ const HomePage = () => {
 
   return (
     <Box className="home" p={4} pt={8}>
-      <Flex justify="center" mb={4}>
-        <SearchBar onSearch={handleSearch} />
-      </Flex>
-      <Flex justify="center" mb={4}>
-        <FilterBar onFilter={(val) => console.log(val)} />
+      <Flex justify={"center"} align={"center"} direction={"row"}>
+        <Flex justify="center" mb={4}>
+          <SearchBar onSearch={handleSearch} />
+        </Flex>
+        <Flex justify="center" mb={4}>
+          <FilterBar onFilter={(val) => console.log(val)} />
+        </Flex>
       </Flex>
       {loading ? (
         <Flex justify="center" align="center" h="100vh">
