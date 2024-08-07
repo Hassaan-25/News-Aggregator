@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text, SimpleGrid } from "@chakra-ui/react";
 import SearchBar from "../../components/SearchBar";
 import FilterBar from "../../components/FilterBar";
 import ArticleCard from "../../components/ArticleCard";
 import { fetchArticles as fetchNewsAPIArticles } from "../../service/newsAPI";
 import { useFiltersContext } from "../../context/FiltersContext";
 // import { fetchArticles as fetchGuardianArticles } from "../../service/guardianAPI";
-// import { fetchArticles as fetchNYTimesArticles } from "../../service/nyTimesAPI";
+import { fetchArticles as fetchNYTimesArticles } from "../../service/nyTimesAPI";
+import { convertNewsArticle } from "../../utils/helpers";
 
 export interface Filters {
   category: string;
@@ -24,7 +25,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchAllArticles = async (query: string, filters: Filters) => {
-    const defaultQuery = query || "election";
+    const defaultQuery = query || "general";
     const currentDate = filters.date || new Date().toISOString().split("T")[0];
 
     console.log(
@@ -32,17 +33,20 @@ const HomePage = () => {
     );
 
     try {
-      const [newsAPIResponse /*, guardianResponse, nyTimesResponse */] =
-        await Promise.all([
-          fetchNewsAPIArticles(defaultQuery, currentDate),
-          //   fetchGuardianArticles(defaultQuery, filters.category, currentDate),
-          //   fetchNYTimesArticles(defaultQuery, filters.category, currentDate),
-        ]);
+      const [
+        newsAPIResponse,
+
+        nyTimesResponse /*, guardianResponse, nyTimesResponse */,
+      ] = await Promise.all([
+        fetchNewsAPIArticles(defaultQuery, currentDate),
+        // fetchGuardianArticles(defaultQuery, filters.category, currentDate),
+        fetchNYTimesArticles(defaultQuery, filters.category, currentDate),
+      ]);
 
       const allArticles = [
-        ...newsAPIResponse.data.articles,
+        ...convertNewsArticle(newsAPIResponse.data.articles),
         // ...guardianResponse.data.response.results,
-        // ...nyTimesResponse.data.response.docs,
+        ...convertNewsArticle(nyTimesResponse.data.response.docs),
       ];
 
       console.log("Fetched articles:", allArticles);
@@ -64,12 +68,12 @@ const HomePage = () => {
   };
 
   return (
-    <Box className="home" p={4} pt={8}>
+    <Box className="home" p={4} pt={8} background={"#f5f5f5"}>
       <Flex justify={"center"} align={"center"} direction={"row"}>
         <Flex justify="center" mb={4}>
           <SearchBar onSearch={handleSearch} />
         </Flex>
-        <Flex justify="center" mb={4}>
+        <Flex justify="center" mb={4} padding={2}>
           <FilterBar onFilter={(val) => console.log(val)} />
         </Flex>
       </Flex>
@@ -84,19 +88,21 @@ const HomePage = () => {
               No articles found for the given query and date.
             </Text>
           ) : (
-            articles
-              .filter((article) => {
-                return (
-                  article.title !== "[Removed]" &&
-                  article.description !== "[Removed]" &&
-                  article.content !== "[Removed]" &&
-                  article.url !== "https://removed.com" &&
-                  article.urlToImage !== null
-                );
-              })
-              .map((article, index) => (
-                <ArticleCard key={index} article={article} />
-              ))
+            <SimpleGrid columns={[1, 2, 3]} spacing={10} padding={10}>
+              {articles
+                .filter((article) => {
+                  return (
+                    article.title !== "[Removed]" &&
+                    article.description !== "[Removed]" &&
+                    article.content !== "[Removed]" &&
+                    article.url !== "https://removed.com" &&
+                    article.urlToImage !== null
+                  );
+                })
+                .map((article, index) => (
+                  <ArticleCard key={index} article={article} />
+                ))}
+            </SimpleGrid>
           )}
         </Box>
       )}

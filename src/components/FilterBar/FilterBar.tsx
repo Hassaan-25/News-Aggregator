@@ -20,7 +20,6 @@ const FilterBar = (props: FilterProps) => {
         <option value="technology">Technology</option>
         <option value="business">Business</option>
         <option value="sports">Sports</option>
-        {/* Add more categories as needed */}
       </select>
       <input
         type="date"

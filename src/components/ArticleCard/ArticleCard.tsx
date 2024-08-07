@@ -1,23 +1,36 @@
 import React from "react";
-import { Box, Link, Text, Heading } from "@chakra-ui/react";
-
-export interface Article {
-  title: string;
-  description: string;
-  url: string;
-}
+import { Card, Box, Link, Text, Heading, Image } from "@chakra-ui/react";
+import placeHolderImg from "../../assets/placeholder-img.jpg";
+import { Article } from "../../types";
 
 const ArticleCard = ({ article }: { article: Article }) => {
   return (
     <Box
       className="article"
-      p={4}
+      p={2}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      margin={"10"}
+      // margin="10"
+      background={"white"}
     >
-      <Box className="articleCard" p={4}>
+      <Box className="articleCard" p={2}>
+        <Image
+          src={article.image ?? placeHolderImg}
+          alt={article.title}
+          borderRadius="md"
+          mb={4}
+          maxHeight="200px"
+          objectFit="cover"
+          transition="transform 0.3s"
+          transitionTimingFunction="cubic-bezier(.4,0,.2,1)"
+          _hover={{ transform: "scale(1.05)" }}
+          width={"100%"}
+        />
+        <Text fontSize="md" mb={4}>
+          Source: {article.source}
+        </Text>
+
         <Heading as="h2" fontSize="xl" mb={2}>
           {article.title}
         </Heading>
