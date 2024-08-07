@@ -1,20 +1,20 @@
 import React from "react";
-import { Card, Box, Link, Text, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Link, Text, Heading, Image } from "@chakra-ui/react";
 import placeHolderImg from "../../assets/placeholder-img.jpg";
 import { Article } from "../../types";
 
 const ArticleCard = ({ article }: { article: Article }) => {
   return (
-    <Box
+    <Card
       className="article"
       p={2}
-      borderWidth="1px"
+      borderWidth="0px"
       borderRadius="lg"
       overflow="hidden"
-      // margin="10"
       background={"white"}
+      boxShadow={"md"}
     >
-      <Box className="articleCard" p={2}>
+      <CardBody className="articleCard" p={2}>
         <Image
           src={article.image ?? placeHolderImg}
           alt={article.title}
@@ -22,15 +22,14 @@ const ArticleCard = ({ article }: { article: Article }) => {
           mb={4}
           maxHeight="200px"
           objectFit="cover"
+          width={"100%"}
           transition="transform 0.3s"
           transitionTimingFunction="cubic-bezier(.4,0,.2,1)"
           _hover={{ transform: "scale(1.05)" }}
-          width={"100%"}
         />
         <Text fontSize="md" mb={4}>
           Source: {article.source}
         </Text>
-
         <Heading as="h2" fontSize="xl" mb={2}>
           {article.title}
         </Heading>
@@ -46,8 +45,8 @@ const ArticleCard = ({ article }: { article: Article }) => {
         >
           Read more
         </Link>
-      </Box>
-    </Box>
+      </CardBody>
+    </Card>
   );
 };
 

@@ -1,25 +1,24 @@
 import React from "react";
-import DebouncedInput from "../../components/common/DebouncedInput";
 import { useFiltersContext } from "../../context/FiltersContext";
+import DebouncedInput from "../../components/common/DebouncedInput";
 
-interface SearchBarProps {
-  onSearch: (searchQuery: string) => void;
-}
-
-const SearchBar = (props: SearchBarProps) => {
-  const { onSearch } = props;
+const SearchBar = () => {
   const {
-    filters: { searchText },
+    filters,
+    actions: { updateFilters },
   } = useFiltersContext();
+  const { searchText } = filters;
+
+  const handleSearch = (value: string) => {
+    updateFilters({ ...filters, searchText: value });
+  };
 
   return (
-    <div>
-      <DebouncedInput
-        value={searchText}
-        onChange={(value: string) => onSearch(value)}
-        placeholder="Search for articles..."
-      />
-    </div>
+    <DebouncedInput
+      value={searchText}
+      onChange={handleSearch}
+      placeholder="Search for articles..."
+    />
   );
 };
 

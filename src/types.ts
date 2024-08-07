@@ -10,4 +10,10 @@ export interface Source {
     image?: string;
     source: string;
   }
-  
+
+  export interface Filters {
+    searchText: string;
+    category: string;
+    date: string;
+    source: string;
+  }
