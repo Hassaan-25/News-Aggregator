@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useFiltersContext } from "../../context/FiltersContext";
-import { Select, Box, Input } from "@chakra-ui/react";
+import { Select, Box } from "@chakra-ui/react";
+import { SingleDatePicker } from "react-dates";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import moment from "moment";
+import "../../App.css";
 
 const FilterBar = () => {
   const {
@@ -8,28 +13,58 @@ const FilterBar = () => {
     actions: { updateFilters },
   } = useFiltersContext();
   const [category, setCategory] = useState(filters.category);
-  const [date, setDate] = useState(filters.date);
+  const [date, setDate] = useState(filters.date ? moment(filters.date) : null);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
-    updateFilters({ ...filters, category, date });
+    updateFilters({
+      ...filters,
+      category,
+      date: date ? date.format("YYYY-MM-DD") : "",
+    });
   }, [category, date]);
 
   return (
-    <Box display="flex" alignItems="center" gap={4}>
-      <Select
-        placeholder="All Categories"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+    <Box
+      display="flex"
+      alignItems="center"
+      flexDirection={["row-reverse", "row"]}
+      gap={4}
+    >
+      <Box display="flex" alignItems="center" justifyContent="center" gap={4}>
+        <Select
+          placeholder="All Categories"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          size={"lg"}
+          width={["150px", "300px"]}
+          background={"white"}
+        >
+          <option value="technology">Technology</option>
+          <option value="business">Business</option>
+          <option value="sports">Sports</option>
+        </Select>
+      </Box>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        gap={4}
+        width={["150px", "200px"]}
+        borderRadius={10}
+        zIndex={10}
       >
-        <option value="technology">Technology</option>
-        <option value="business">Business</option>
-        <option value="sports">Sports</option>
-      </Select>
-      <Input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
+        <SingleDatePicker
+          date={date}
+          onDateChange={(date) => setDate(date)}
+          focused={focused}
+          onFocusChange={({ focused }) => setFocused(focused)}
+          id="date_picker"
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+          displayFormat="YYYY-MM-DD"
+        />
+      </Box>
     </Box>
   );
 };

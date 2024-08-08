@@ -43,6 +43,9 @@ const DebouncedInput = ({
       value={inputValue}
       onChange={handleChange}
       size={"lg"}
+      borderRadius={4}
+      width={["320px", "300px"]}
+      background={"white"}
     />
   );
 };
