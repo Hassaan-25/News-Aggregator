@@ -22,7 +22,7 @@ const FilterBar = () => {
       category,
       date: date ? date.format("YYYY-MM-DD") : "",
     });
-  }, [category, date]);
+  }, [category, date, updateFilters, filters]);
 
   return (
     <Box
@@ -31,7 +31,16 @@ const FilterBar = () => {
       flexDirection={["row-reverse", "row"]}
       gap={4}
     >
-      <Box display="flex" alignItems="center" justifyContent="center" gap={4}>
+      <Box display="flex" flexDirection={"column"} gap={2}>
+        <label
+          htmlFor="category"
+          style={{
+            fontSize: "14px",
+            color: "black",
+          }}
+        >
+          Pick a Category
+        </label>
         <Select
           placeholder="All Categories"
           value={category}
@@ -39,6 +48,7 @@ const FilterBar = () => {
           size={"lg"}
           width={["150px", "300px"]}
           background={"white"}
+          color={category === "" ? "#718096" : "initial"}
         >
           <option value="technology">Technology</option>
           <option value="business">Business</option>
@@ -47,13 +57,21 @@ const FilterBar = () => {
       </Box>
       <Box
         display="flex"
-        alignItems="center"
-        justifyContent="center"
-        gap={4}
+        flexDirection={"column"}
+        gap={2}
         width={["150px", "200px"]}
         borderRadius={10}
         zIndex={10}
       >
+        <label
+          htmlFor="date_picker"
+          style={{
+            fontSize: "14px",
+            color: "black",
+          }}
+        >
+          Date
+        </label>
         <SingleDatePicker
           date={date}
           onDateChange={(date) => setDate(date)}

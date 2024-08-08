@@ -7,16 +7,18 @@
   pointer-events: none;
 }
 
-
-.SingleDatePickerInput__withBorder{
+.SingleDatePickerInput__withBorder {
   border-radius: 10px !important;
 }
 
-.DateInput{
+.DateInput {
   width: 100%;
 }
 
-
+.DateInput_input {
+  color: black !important;
+  font-weight: 400 !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import { fetchArticles as fetchNewsAPIArticles } from "../service/newsAPI";
 import { fetchArticles as fetchNYTimesArticles } from "../service/nyTimesAPI";
-import { useFiltersContext } from "../context/FiltersContext";
 import { convertNewsArticle } from "../utils/helpers";
-import { Article } from "../types";
+import { Article, Filters } from "../types";
 
 interface UseApiResponse {
   data: Article[];
@@ -12,14 +10,12 @@ interface UseApiResponse {
   loading: boolean;
 }
 
-const useApi = (): UseApiResponse => {
+const useApi = (filters: Filters): UseApiResponse => {
   const [data, setData] = useState<Article[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const {
-    filters: { searchText, category, date, source },
-  } = useFiltersContext();
+  const { searchText, category, date, source } = filters;
 
   const currentDate = date || new Date().toISOString().split("T")[0];
 
@@ -27,7 +23,7 @@ const useApi = (): UseApiResponse => {
     setLoading(true);
 
     const promises = [
-      fetchNewsAPIArticles(searchText ? searchText: "general"),
+      fetchNewsAPIArticles(searchText ? searchText : "general"),
       fetchNYTimesArticles(searchText, category, currentDate, source),
     ];
 
@@ -55,7 +51,7 @@ const useApi = (): UseApiResponse => {
     } finally {
       setLoading(false);
     }
-  }, [searchText, category, source]);
+  }, [searchText, category, source, currentDate]);
 
   useEffect(() => {
     fetchData();
