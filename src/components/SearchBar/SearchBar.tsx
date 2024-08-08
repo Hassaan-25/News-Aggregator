@@ -24,7 +24,7 @@ const SearchBar = () => {
             color: "black",
           }}
         >
-          Enter Keyword
+          Enter Keyword:
         </label>
         <DebouncedInput
           value={searchText}

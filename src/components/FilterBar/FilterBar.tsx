@@ -39,7 +39,7 @@ const FilterBar = () => {
             color: "black",
           }}
         >
-          Pick a Category
+          Pick a Category:
         </label>
         <Select
           placeholder="All Categories"
@@ -70,7 +70,7 @@ const FilterBar = () => {
             color: "black",
           }}
         >
-          Date
+          Date:
         </label>
         <SingleDatePicker
           date={date}
