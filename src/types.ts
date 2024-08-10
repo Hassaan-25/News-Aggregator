@@ -8,7 +8,7 @@ export interface Source {
     description: string;
     url?: string;
     image?: string;
-    source: string;
+    source?: string;
     publishDate : string;
   }
 
