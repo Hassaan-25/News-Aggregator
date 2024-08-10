@@ -62,9 +62,10 @@ const ContextWrapper = memo((props: WrapperProps) => {
       filters,
       articles: data,
       loading,
+      error,
       actions: { updateFilters },
     }),
-    [filters, data, loading, updateFilters]
+    [filters, data, loading, error, updateFilters]
   );
 
   return (

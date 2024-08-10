@@ -31,9 +31,9 @@ const SourceDropdown = () => {
         color="black"
       >
         <option value="wired">Wired</option>
-        <option value="the verge">The Verge</option>
+        <option value="the-verge">The Verge</option>
+        <option value="techcrunch">TechCrunch</option>
         <option value="cnn">CNN</option>
-        <option value="theguardian">The Guardian</option>
       </Select>
     </Box>
   );
