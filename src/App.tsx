@@ -9,20 +9,18 @@ import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
-    <>
+    <FiltersContext>
       <Nav />
       <ChakraBaseProvider theme={chakraTheme}>
-        <FiltersContext>
-          <Router>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              {/* <Route path="/preferences" element={<PreferencesPage />} /> */}
-            </Routes>
-          </Router>
-        </FiltersContext>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {/* <Route path="/preferences" element={<PreferencesPage />} /> */}
+          </Routes>
+        </Router>
       </ChakraBaseProvider>
       <Footer />
-    </>
+    </FiltersContext>
   );
 };
 
