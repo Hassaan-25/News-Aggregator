@@ -1,9 +1,9 @@
 import React from "react";
 import { useFiltersContext } from "../../context/FiltersContext";
-import DebouncedInput from "../../components/common/DebouncedInput";
-import { Box } from "@chakra-ui/react";
+import DebouncedInput from "../common/DebouncedInput";
+import { Box, FormLabel } from "@chakra-ui/react";
 
-const SearchBar = () => {
+const SearchInput = () => {
   const {
     filters,
     actions: { updateFilters },
@@ -16,16 +16,8 @@ const SearchBar = () => {
 
   return (
     <>
-      <Box display="flex" flexDirection={"column"} gap={2}>
-        <label
-          htmlFor="category"
-          style={{
-            fontSize: "14px",
-            color: "black",
-          }}
-        >
-          Enter Keyword:
-        </label>
+      <Box display="flex" flexDirection={"column"}>
+        <FormLabel>Enter Keyword:</FormLabel>
         <DebouncedInput
           value={searchText}
           onChange={handleSearch}
@@ -36,4 +28,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchInput;
