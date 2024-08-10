@@ -5,6 +5,7 @@ import React, {
   useContext,
   useMemo,
   useState,
+  useEffect,
   type ReactNode,
 } from "react";
 import { filtersInitialValues } from "./initialValues";
@@ -52,7 +53,9 @@ const ContextWrapper = memo((props: WrapperProps) => {
 
   const { data, loading, error } = useApi(filters);
 
-  console.log("Data:", data, "Loading:", loading, "Error:", error);
+  useEffect(() => {
+    console.log("filters Val", data);
+  }, [data]);
 
   const value = useMemo(
     () => ({
