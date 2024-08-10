@@ -1,21 +1,31 @@
 import axios from "axios";
+import { Filters } from "../types";
 
 const API_KEY = process.env.REACT_APP_NYT_API_KEY;
 const BASE_URL = "https://api.nytimes.com/svc/search/v2";
 
-export const fetchArticles = (query: string, section: string, date: string, source: string) => {
+export const fetchArticles = (filters: Filters) => {
+  const { searchText, date, source, category } = filters;
+
   const params: any = {
-    q: query,
+    q: searchText,
     "api-key": API_KEY,
   };
 
   if (date) {
-    params["begin_date"] = date.replace(/-/g, ""); // NYT requires date in YYYYMMDD format
+    params["begin_date"] = date.replace(/-/g, "");
   }
 
-  if (section) {
-    params.fq = `section_name:("${section}")`;
+  if (source) {
+    params.fq = `section_name:("${source}")`;
   }
+
+  if (category) {
+    params.fq = `section_name:("${category}")`;
+  }
+  
+
+
 
   return axios.get(`${BASE_URL}/articlesearch.json`, { params });
 };
