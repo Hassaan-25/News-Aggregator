@@ -1,30 +1,32 @@
-import {
+import React, {
   createContext,
   memo,
   useCallback,
   useContext,
   useMemo,
   useState,
+  useEffect,
   type ReactNode,
 } from "react";
 import { filtersInitialValues } from "./initialValues";
+import { Article, Filters } from "../../types";
+import useApi from "../../hooks/useApi";
 
-export interface Filters {
-  searchText: string;
-  category: string;
-  date: string;
-}
 type ContextActions = {
-  updateFilters: (values: any) => void;
+  updateFilters: (values: Filters) => void;
 };
 
 type FiltersContextValues = {
   filters: Filters;
+  articles: Article[];
+  loading: boolean;
   actions: ContextActions;
 };
 
 const FiltersContext = createContext<FiltersContextValues>({
   filters: filtersInitialValues,
+  articles: [],
+  loading: true,
   actions: {
     updateFilters: () => undefined,
   },
@@ -40,7 +42,7 @@ interface WrapperProps {
 }
 
 const ContextWrapper = memo((props: WrapperProps) => {
-  const [filters, setFormData] = useState({ ...filtersInitialValues });
+  const [filters, setFormData] = useState<Filters>({ ...filtersInitialValues });
 
   const updateFilters = useCallback((values: Filters) => {
     setFormData((prevState) => ({
@@ -49,12 +51,20 @@ const ContextWrapper = memo((props: WrapperProps) => {
     }));
   }, []);
 
+  const { data, loading, error } = useApi(filters);
+
+  useEffect(() => {
+    console.log("filters Val", data);
+  }, [data]);
+
   const value = useMemo(
     () => ({
       filters,
+      articles: data,
+      loading,
       actions: { updateFilters },
     }),
-    [filters, updateFilters]
+    [filters, data, loading, updateFilters]
   );
 
   return (

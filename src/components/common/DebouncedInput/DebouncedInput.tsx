@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { debounce } from "lodash";
 import { Input } from "@chakra-ui/react";
 
@@ -23,7 +23,11 @@ const DebouncedInput = ({
   type = "text",
   isDisabled = false,
 }: DebouncedInputProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>(value);
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -36,9 +40,17 @@ const DebouncedInput = ({
       required={isRequired}
       placeholder={placeholder}
       type={type}
-      value={inputValue ?? value}
+      value={inputValue}
       onChange={handleChange}
       size={"lg"}
+      borderRadius={4}
+      width={["300px", "250px"]}
+      background={"white"}
+      sx={{
+        "::placeholder": {
+          color: "#718096",
+        },
+      }}
     />
   );
 };

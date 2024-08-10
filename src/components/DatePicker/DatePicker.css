@@ -1,0 +1,21 @@
+.SingleDatePickerInput__withBorder {
+  border-radius: 0.375rem !important;
+  width: 200px;
+}
+
+.DateInput {
+  width: 100%;
+  border-radius: 0.375rem !important;
+}
+
+.DateInput_input {
+  color: black !important;
+  border-radius: 0.375rem !important;
+  font-weight: 400 !important;
+}
+
+@media screen and (max-width: 465px) {
+  .SingleDatePickerInput__withBorder {
+    width: 100%;
+  }
+}
