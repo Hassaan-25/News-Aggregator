@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { fetchArticles as fetchNewsAPIArticles } from "../service/newsAPI";
 import { fetchArticles as fetchNYTimesArticles } from "../service/nyTimesAPI";
+import { fetchArticles as fetchGuardianAPIArticles } from "../service/guardianAPI";
 import { convertNewsArticle } from "../utils/helpers";
 import { Article, Filters } from "../types";
 
@@ -23,8 +24,9 @@ const useApi = (filters: Filters): UseApiResponse => {
     setLoading(true);
 
     const promises = [
-      fetchNewsAPIArticles(searchText ? searchText : "general"),
-      fetchNYTimesArticles(searchText, category, currentDate, source),
+      fetchNewsAPIArticles(filters),
+      fetchNYTimesArticles(filters),
+      fetchGuardianAPIArticles(filters),
     ];
 
     try {
@@ -36,16 +38,23 @@ const useApi = (filters: Filters): UseApiResponse => {
         results[1].status === "fulfilled"
           ? results[1].value.data.response.docs
           : [];
+      const guardianAPIResponse =
+        results[2].status === "fulfilled"
+          ? results[2].value.data.response.results
+          : [];
 
       const allArticles = [
         ...convertNewsArticle(newsAPIResponse),
         ...convertNewsArticle(nyTimesResponse),
+        ...convertNewsArticle(guardianAPIResponse),
       ];
+
       console.log("Fetched articles:", allArticles);
 
       setData(allArticles);
       setError(null);
     } catch (err: any) {
+      console.log(err);
       setError(err.message);
       setData([]);
     } finally {
