@@ -6,9 +6,10 @@ export interface Source {
   export interface Article {
     title: string;
     description: string;
-    url: string;
+    url?: string;
     image?: string;
     source: string;
+    publishDate : string;
   }
 
   export interface Filters {
