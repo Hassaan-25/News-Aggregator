@@ -16,10 +16,6 @@ const useApi = (filters: Filters): UseApiResponse => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { searchText, category, date, source } = filters;
-
-  const currentDate = date || new Date().toISOString().split("T")[0];
-
   const fetchData = useCallback(async () => {
     setLoading(true);
 
@@ -49,8 +45,6 @@ const useApi = (filters: Filters): UseApiResponse => {
         ...convertNewsArticle(guardianAPIResponse),
       ];
 
-      console.log("Fetched articles:", allArticles);
-
       setData(allArticles);
       setError(null);
     } catch (err: any) {
@@ -60,7 +54,7 @@ const useApi = (filters: Filters): UseApiResponse => {
     } finally {
       setLoading(false);
     }
-  }, [searchText, category, source, currentDate]);
+  }, [filters]);
 
   useEffect(() => {
     fetchData();
