@@ -44,7 +44,7 @@ const DebouncedInput = ({
       onChange={handleChange}
       size={"lg"}
       borderRadius={4}
-      width={["320px", "300px"]}
+      width={["300px", "250px"]}
       background={"white"}
       sx={{
         "::placeholder": {
