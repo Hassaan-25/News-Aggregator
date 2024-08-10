@@ -29,14 +29,7 @@ export default function Nav() {
           </Box>
 
           <Box>
-            <Text
-              fontSize={["sm", "2xl"]}
-              //beautiful font family ?
-
-              fontFamily={"manrope"}
-              fontWeight={700}
-              color={"white"}
-            >
+            <Text fontSize={["sm", "2xl"]} fontWeight={700} color={"white"}>
               News Aggregator
             </Text>
           </Box>
