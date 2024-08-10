@@ -1,5 +1,4 @@
 import { Box, Flex, Spinner, Text, SimpleGrid } from "@chakra-ui/react";
-import SearchBar from "../../components/SearchBar";
 import FilterBar from "../../components/FilterBar";
 import ArticleCard from "../../components/ArticleCard";
 import { useFiltersContext } from "../../context/FiltersContext";
@@ -11,7 +10,7 @@ const HomePage = () => {
 
   return (
     <Box className="home" p={4} background={"#f5f5f5"}>
-      <div className={`${styles.searchWrapper}`}>
+      <Box className={`${styles.searchWrapper}`}>
         <Box
           className={`${styles.searchSection}`}
           p={4}
@@ -24,15 +23,12 @@ const HomePage = () => {
             align={"center"}
             direction={["column", "row"]}
           >
-            <Flex justify="center" mb={4}>
-              <SearchBar />
-            </Flex>
             <Flex justify="center" mb={4} padding={2}>
               <FilterBar />
             </Flex>
           </Flex>
         </Box>
-      </div>
+      </Box>
       {loading ? (
         <Flex justify="center" align="center" h="100vh">
           <Spinner size="xl" />
