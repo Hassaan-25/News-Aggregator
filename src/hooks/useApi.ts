@@ -48,7 +48,7 @@ const useApi = (filters: Filters): UseApiResponse => {
       setData(allArticles);
       setError(null);
     } catch (err: any) {
-      console.log(err);
+      console.error(err);
       setError(err.message);
       setData([]);
     } finally {

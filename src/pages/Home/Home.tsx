@@ -3,20 +3,21 @@ import FilterBar from "../../components/FilterBar";
 import ArticleCard from "../../components/ArticleCard";
 import { useFiltersContext } from "../../context/FiltersContext";
 import styles from "./Home.module.scss";
+import { Colors } from "../../constants/colors";
 
 const HomePage = () => {
   const { articles, loading } = useFiltersContext();
   const sortedArticles = articles.sort((a, b) => (a.image ? -1 : 1));
 
   return (
-    <Box className="home" p={4} background={"#f5f5f5"}>
+    <Box className="home" p={4} background={Colors.background}>
       <Box className={`${styles.searchWrapper}`}>
         <Box
           className={`${styles.searchSection}`}
           p={4}
           pt={8}
           mx={[0, 10]}
-          background={"#fffff"}
+          background={Colors.SearchBackground}
         >
           <Flex
             justify={"center"}
@@ -31,12 +32,18 @@ const HomePage = () => {
       </Box>
       {loading ? (
         <Flex justify="center" align="center" h="100vh">
-          <Spinner size="xl" />
+          <Spinner
+            size="xl"
+            thickness="4px"
+            speed="0.65s"
+            emptyColor={Colors.gray}
+            color={Colors.blue}
+          />
         </Flex>
       ) : (
         <Box className="articles">
           {articles.length === 0 ? (
-            <Text fontSize="lg" color="gray.500">
+            <Text fontSize="lg" color={Colors.gray}>
               No articles found for the given query and date.
             </Text>
           ) : (
