@@ -13,7 +13,7 @@ export const getNyTimeImageUrl = (multimedia: any[]): string | undefined => {
 export const convertNewsArticle = (articles: any[]): Article[] => {
   return articles && articles.length > 0
     ? articles.map((article) => ({
-        title: article.title || article.webTitle,
+        title: article.title || article.webTitle || article.headline.main,
         description: article.abstract || article.description,
         url: article.url || article.webUrl,
         publishDate:
