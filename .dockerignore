@@ -1,0 +1,32 @@
+
+# Ignore node_modules directory
+node_modules
+npm-debug.log
+
+# Ignore build directory
+build
+
+# Ignore log files
+*.log
+logs
+
+# Ignore coverage files
+coverage
+
+# Ignore any editor or IDE-specific files
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore Docker files
+Dockerfile
+.dockerignore
