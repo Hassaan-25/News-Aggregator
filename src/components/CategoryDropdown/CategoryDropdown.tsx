@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useFiltersContext } from "../../context/FiltersContext";
 import { FormLabel, Select, Box } from "@chakra-ui/react";
+import { Colors } from "../../constants/colors";
 
 const CategoryDropdown = () => {
   const {
@@ -9,7 +10,7 @@ const CategoryDropdown = () => {
   } = useFiltersContext();
 
   const handleCategoryChange = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
       updateFilters({
         ...filters,
         category: event.target.value,
@@ -27,8 +28,8 @@ const CategoryDropdown = () => {
         onChange={handleCategoryChange}
         size={"lg"}
         width={["100%", "200px"]}
-        background={"white"}
-        color="black"
+        background={Colors.white}
+        color={Colors.black}
       >
         <option value="technology">Technology</option>
         <option value="sports">Sports</option>

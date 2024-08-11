@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { debounce } from "lodash";
 import { Input } from "@chakra-ui/react";
+import { Colors } from "../../../constants/colors";
 
 const debounceUpdater = debounce((callBack: any) => {
   callBack();
@@ -45,10 +46,10 @@ const DebouncedInput = ({
       size={"lg"}
       borderRadius={4}
       width={["300px", "250px"]}
-      background={"white"}
+      background={Colors.white}
       sx={{
         "::placeholder": {
-          color: "#718096",
+          color: `${Colors.placeHolderText}`,
         },
       }}
     />
