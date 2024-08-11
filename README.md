@@ -1,46 +1,99 @@
-# Getting Started with Create React App
+# News Aggregator Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Demo URL:** [https://news-app-aggregator.netlify.app/](https://news-app-aggregator.netlify.app/)  
+_Note: Some APIs do not work in the browser due to restrictions on the Developer's Plan. They only accept requests from `localhost`._
 
-## Available Scripts
+This repository contains a News Aggregator application built with React. The application fetches and displays news articles from multiple sources, with a focus on responsiveness and modern UI components. The app is containerized using Docker and served using Nginx.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Responsive UI**: Built using Chakra UI for a consistent and responsive design.
+- **Date Picker**: Integrated with `react-dates` for selecting date ranges.
+- **API Integration**: Fetches articles from multiple news sources using Axios.
+- **Dockerized**: The app is containerized and can be easily deployed using Docker.
+- **Production-ready**: The React app is served using Nginx for optimal performance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+To run this project locally, ensure you have the following installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org/) (v18.x recommended)
+- [Docker](https://www.docker.com/)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the Repository**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   \`\`\`bash
+   git clone https://github.com/Hassaan-25/News-Aggregator.git
+   cd News-Aggregator
+   \`\`\`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**:
 
-### `npm run eject`
+   Use the following command to install the dependencies with the `--legacy-peer-deps` flag:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   \`\`\`bash
+   npm install --legacy-peer-deps
+   \`\`\`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Run the Development Server**:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   Start the development server using:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   \`\`\`bash
+   npm start
+   \`\`\`
 
-## Learn More
+   The app should now be running on [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Building and Running with Docker
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This application is configured to be built and served using Docker and Nginx.
+
+1. **Build the Docker Image**:
+
+   Run the following command to build the Docker image:
+
+   \`\`\`bash
+   docker compose up -d
+   \`\`\`
+
+2. **Access the Application**:
+
+   After building the image, you can run the container and access the app by navigating to \`http://localhost\` in your browser.
+
+## Dockerfile Explanation
+
+The Dockerfile in this repository is a multi-stage build Dockerfile, consisting of two stages:
+
+### Stage 1: Build the React App
+
+- **Base Image**: Uses \`node:20\` as the base image.
+- **Working Directory**: The working directory is set to \`/app\`.
+- **Dependencies**: Installs project dependencies using \`npm install --legacy-peer-deps\`.
+- **Build**: Runs the React build process using \`npm run build\`.
+
+### Stage 2: Serve the React App Using Nginx
+
+- **Base Image**: Uses \`nginx:alpine\` as the base image for serving the app.
+- **Copy Build Output**: Copies the build output from the previous stage to the Nginx HTML directory.
+- **Expose Port**: Exposes port 80 for HTTP traffic.
+- **Command**: Starts the Nginx server to serve the application.
+
+## Environment Variables
+
+You can define environment variables required by the application using a \`.env\` file.  
+An \`.env.example\` file is provided as a template.
+
+
+## Acknowledgements
+
+- [Chakra UI](https://chakra-ui.com/)
+- [React](https://reactjs.org/)
+- [Nginx](https://www.nginx.com/)
+- [Docker](https://www.docker.com/)
+
+
