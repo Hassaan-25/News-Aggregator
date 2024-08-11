@@ -1,12 +1,12 @@
-import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
+import { Colors } from "../../constants/colors";
 
 const Footer = () => {
   return (
     <Box as="footer" width="100%" background="#0F4C75" boxShadow="md" p={4}>
       <Flex justify="center" align="center">
         <Text
-          color={"white"}
+          color={Colors.white}
           fontFamily={"monospace"}
           fontSize={"sm"}
           textAlign={"center"}

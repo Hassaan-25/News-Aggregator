@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Box,
   Flex,
@@ -9,14 +7,13 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  MenuDivider,
   useColorModeValue,
   Stack,
   Center,
 } from "@chakra-ui/react";
+import { Colors } from "../../constants/colors";
 
-export default function Nav() {
+const Nav = () => {
   return (
     <>
       <Box bg={useColorModeValue("#1B262C", "#1B262C")} px={[4, 16]}>
@@ -29,7 +26,11 @@ export default function Nav() {
           </Box>
 
           <Box>
-            <Text fontSize={["sm", "2xl"]} fontWeight={700} color={"white"}>
+            <Text
+              fontSize={["sm", "2xl"]}
+              fontWeight={700}
+              color={Colors.white}
+            >
               News Aggregator
             </Text>
           </Box>
@@ -70,4 +71,6 @@ export default function Nav() {
       </Box>
     </>
   );
-}
+};
+
+export default Nav;

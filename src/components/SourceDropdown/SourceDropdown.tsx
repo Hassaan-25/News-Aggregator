@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useFiltersContext } from "../../context/FiltersContext";
 import { FormLabel, Select, Box } from "@chakra-ui/react";
+import { Colors } from "../../constants/colors";
 
 const SourceDropdown = () => {
   const {
@@ -9,7 +10,7 @@ const SourceDropdown = () => {
   } = useFiltersContext();
 
   const handleSourceChange = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
       updateFilters({
         ...filters,
         source: event.target.value,
@@ -27,8 +28,8 @@ const SourceDropdown = () => {
         onChange={handleSourceChange}
         size={"lg"}
         width={["100%", "200px"]}
-        background={"white"}
-        color="black"
+        background={Colors.white}
+        color={Colors.black}
       >
         <option value="wired">Wired</option>
         <option value="the-verge">The Verge</option>

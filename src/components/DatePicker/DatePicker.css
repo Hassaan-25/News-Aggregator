@@ -18,4 +18,8 @@
   .SingleDatePickerInput__withBorder {
     width: 100%;
   }
+
+  .SingleDatePicker{
+    width: 100%;
+  }
 }
