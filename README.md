@@ -26,26 +26,21 @@ To run this project locally, ensure you have the following installed:
 
 1. **Clone the Repository**:
 
-   \`\`\`bash
    git clone https://github.com/Hassaan-25/News-Aggregator.git
+
    cd News-Aggregator
-   \`\`\`
 
 2. **Install Dependencies**:
 
    Use the following command to install the dependencies with the `--legacy-peer-deps` flag:
 
-   \`\`\`bash
    npm install --legacy-peer-deps
-   \`\`\`
 
 3. **Run the Development Server**:
 
    Start the development server using:
 
-   \`\`\`bash
    npm start
-   \`\`\`
 
    The app should now be running on [http://localhost:3000](http://localhost:3000).
 
@@ -57,9 +52,7 @@ This application is configured to be built and served using Docker and Nginx.
 
    Run the following command to build the Docker image:
 
-   \`\`\`bash
    docker compose up -d
-   \`\`\`
 
 2. **Access the Application**:
 
@@ -88,12 +81,9 @@ The Dockerfile in this repository is a multi-stage build Dockerfile, consisting 
 You can define environment variables required by the application using a \`.env\` file.  
 An \`.env.example\` file is provided as a template.
 
-
 ## Acknowledgements
 
 - [Chakra UI](https://chakra-ui.com/)
 - [React](https://reactjs.org/)
 - [Nginx](https://www.nginx.com/)
 - [Docker](https://www.docker.com/)
-
-
