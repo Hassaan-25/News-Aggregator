@@ -1,6 +1,12 @@
 import { Article } from "../types";
+import moment from "moment";
 
-export const getNyTimeImageUrl = (multimedia: any[]): string | undefined => {
+type Media = {
+  subtype : string;
+  url : string;
+}
+
+export const getNyTimeImageUrl = (multimedia: Media[]): string | undefined => {
   if (!multimedia || multimedia.length === 0) {
     return undefined;
   }
@@ -24,4 +30,9 @@ export const convertNewsArticle = (articles: any[]): Article[] => {
           : getNyTimeImageUrl(article.multimedia),
       }))
     : [];
+};
+
+
+export const isOutsideRange = (day: moment.Moment) => {
+  return day.isAfter(moment(), "day");
 };
