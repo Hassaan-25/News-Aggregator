@@ -1,9 +1,10 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ArticleCard from "./ArticleCard";
 import { Article } from "../../types";
 import placeHolderImg from "../../assets/placeholder-img.jpg";
+import { DEFAULT_DATE_FORMAT } from "./ArticleCard";
+import moment from "moment";
 
 describe("ArticleCard", () => {
   const mockArticle: Article = {
@@ -30,17 +31,8 @@ describe("ArticleCard", () => {
   it("renders the publish date correctly formatted", () => {
     render(<ArticleCard article={mockArticle} />);
 
-    const formattedDate = new Date(mockArticle.publishDate).toLocaleDateString(
-      "en-US",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short",
-      }
+    const formattedDate = moment(mockArticle.publishDate).format(
+      DEFAULT_DATE_FORMAT
     );
 
     const dateElement = screen.getByText(`Published on ${formattedDate}`);

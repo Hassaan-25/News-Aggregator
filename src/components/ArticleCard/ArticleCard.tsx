@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo, useState } from "react";
 import {
   Card,
   CardBody,
@@ -9,25 +9,25 @@ import {
   Flex,
   Box,
   Spacer,
+  Spinner,
 } from "@chakra-ui/react";
 import placeHolderImg from "../../assets/placeholder-img.jpg";
 import { Article } from "../../types";
+import moment from "moment";
+import { Colors } from "../../constants/colors";
 
-const options: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-  timeZoneName: "short",
-};
+export const DEFAULT_DATE_FORMAT = "MMMM Do YYYY";
 
 const ArticleCard = ({ article }: { article: Article }) => {
-  const formattedDate = new Date(article.publishDate).toLocaleDateString(
-    "en-US",
-    options
+  const formattedDate = useMemo(
+    () => moment(article.publishDate).format(DEFAULT_DATE_FORMAT),
+    [article.publishDate]
   );
+
+  const [isLoading, setIsLoading] = useState(true);
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <Card
@@ -36,13 +36,23 @@ const ArticleCard = ({ article }: { article: Article }) => {
       borderWidth="0px"
       borderRadius="lg"
       overflow="hidden"
-      background={"white"}
+      background={Colors.white}
       boxShadow={"md"}
     >
       <CardBody className="articleCard" p={2}>
         <Flex direction="column" height="100%">
+          {isLoading && (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              maxWidth="100%"
+              minHeight="200px"
+            >
+              <Spinner size="xl" color={Colors.textSecondary} />
+            </Flex>
+          )}
           <Image
-            src={article.image ?? placeHolderImg}
+            src={article?.image ?? placeHolderImg}
             alt={article.title}
             borderRadius="md"
             mb={4}
@@ -52,13 +62,15 @@ const ArticleCard = ({ article }: { article: Article }) => {
             transition="transform 0.3s"
             transitionTimingFunction="cubic-bezier(.4,0,.2,1)"
             _hover={{ transform: "scale(1.05)" }}
+            onLoad={handleImageLoad}
+            display={isLoading ? "none" : "block"}
           />
 
-          <Text fontSize="md" mb={2} color={"#7C7D7D"}>
+          <Text fontSize="md" mb={2} color={Colors.textSecondary}>
             Published on {formattedDate}
           </Text>
           <Box mb={4}>
-            {article.source && (
+            {article?.source && (
               <Text fontSize="md" mb={4}>
                 Source: {article.source}
               </Text>
@@ -71,10 +83,10 @@ const ArticleCard = ({ article }: { article: Article }) => {
           </Box>
           <Spacer />
           <Link
-            href={article.url}
+            href={article?.url}
             target="_blank"
             rel="noopener noreferrer"
-            color="blue.500"
+            color={Colors.LinkColor}
             textDecoration="underline"
           >
             Read more
