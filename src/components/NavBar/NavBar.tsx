@@ -62,9 +62,6 @@ export default function Nav() {
                     <p>Hassaan Bin sajid</p>
                   </Center>
                   <br />
-                  <MenuDivider />
-
-                  <MenuItem>Account</MenuItem>
                 </MenuList>
               </Menu>
             </Stack>

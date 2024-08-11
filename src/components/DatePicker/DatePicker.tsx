@@ -35,7 +35,7 @@ const DatePicker = () => {
 
   return (
     <Box display="flex" flexDirection={"column"}>
-      <FormLabel>Select Date:</FormLabel>
+      <FormLabel>From Date:</FormLabel>
       <SingleDatePicker
         date={filters.date ? moment(filters.date) : null}
         onDateChange={handleDateChange}
