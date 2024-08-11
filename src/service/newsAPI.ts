@@ -4,10 +4,20 @@ import { Filters } from "../types";
 const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 const BASE_URL = "https://newsapi.org/v2";
 
+type NewsApiParams = {
+  q?: string;
+  sortBy?: string;
+  apiKey?: string;
+  from?: string;
+  sources?: string;
+  category?: string;
+};
+
+
 export const fetchArticles = (filters: Filters) => {
   const { searchText, date, source, category } = filters;
 
-  const params: any = {
+  const params: NewsApiParams = {
     q: searchText.length > 0 ? searchText : "general",
     sortBy: "popularity",
     apiKey: API_KEY,

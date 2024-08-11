@@ -4,11 +4,18 @@ import { Filters } from "../types";
 const API_KEY = process.env.REACT_APP_GUARDIAN_API_KEY;
 const BASE_URL = "https://content.guardianapis.com";
 
+type GuardianApiParams = {
+  "api-key"?: string;
+  q?: string;
+  fromDate?: string;
+  section?: string;
+  tag?: string;
+};
+
 export const fetchArticles = (filters: Filters) => {
   const { searchText, date, source, category } = filters;
 
-  // Initialize params with the API key
-  const params: any = {
+  const params: GuardianApiParams = {
     "api-key": API_KEY,
   };
 
@@ -25,10 +32,8 @@ export const fetchArticles = (filters: Filters) => {
   }
 
   if (category) {
-    params.tag	 = category;
+    params.tag = category;
   }
 
-
-  // Make the request with the constructed params
   return axios.get(`${BASE_URL}/search`, { params });
 };

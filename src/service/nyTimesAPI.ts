@@ -4,10 +4,17 @@ import { Filters } from "../types";
 const API_KEY = process.env.REACT_APP_NYT_API_KEY;
 const BASE_URL = "https://api.nytimes.com/svc/search/v2";
 
+type NYTApiParams = {
+  q?: string;
+  "api-key"?: string;
+  begin_date?: string;
+  fq?: string;
+};
+
 export const fetchArticles = (filters: Filters) => {
   const { searchText, date, source, category } = filters;
 
-  const params: any = {
+  const params: NYTApiParams = {
     q: searchText,
     "api-key": API_KEY,
   };
